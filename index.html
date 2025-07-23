@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Agent Reporting System</title>
+  <link rel="stylesheet" href="src/style.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script type="module" src="src/main.js"></script>
+
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+        <h1>Intelligent ERP Dashboard</h1>
+        <div class="header-actions">
+            <button id="runAnalysisBtn" class="button success">Run AI Analysis</button>
+            <button id="settings-btn" class="button primary">Settings</button>
+        </div>
+    </header>
+    <aside class="dashboard-sidebar">
+        <div class="sidebar-content">
+            <h2 class="sidebar-title">Tables</h2>
+            <div class="upload-section section">
+                <label for="csvFile" class="button primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                    Upload CSV
+                </label>
+                <input type="file" id="csvFile" accept=".csv">
+                <span id="file-name-display" class="file-name-display"></span>
+            </div>
+            <div id="table-list-container" class="table-list-container section">
+                <!-- Table list will be dynamically populated here -->
+                <p class="placeholder-text">No tables found.</p>
+            </div>
+        </div>
+    </aside>
+    <main class="dashboard-main">
+        <div id="kpi-container" class="kpi-container">
+            <!-- KPI cards will be dynamically populated here -->
+        </div>
+        <div id="chart-container" class="chart-container card">
+            <!-- Chart will be dynamically populated here -->
+        </div>
+        <div id="datatable-container" class="datatable-container card">
+            <div class="viewer-header">
+                <h2 id="viewer-title">Select a Table</h2>
+                <div id="viewer-actions" class="hidden">
+                    <button id="exportPdfBtn" class="button info">Export PDF</button>
+                </div>
+            </div>
+            <div id="report-content-container" class="report-container">
+                <!-- The report will be structured here: Summary, Chart, and Table -->
+            </div>
+        </div>
+    </main>
+    <footer class="dashboard-footer">
+        <div id="progress-container" class="progress-tracker hidden"></div>
+        <div id="debug-log-container" class="debug-log-container">
+            <h2>Execution Log</h2>
+            <div id="debug-log" class="debug-log">
+                <p class="placeholder-text">Log will appear here...</p>
+            </div>
+        </div>
+    </footer>
+  </div>
+
+  <!-- Settings Panel -->
+  <div id="settings-overlay" class="settings-overlay hidden"></div>
+  <div id="settings-panel" class="settings-panel translate-x-full">
+    <div class="settings-panel-content">
+      <div class="settings-header">
+        <h3>Settings</h3>
+        <button id="close-panel-btn" class="close-button">&times;</button>
+      </div>
+      <form id="settings-form" class="settings-form">
+        <div class="form-group">
+          <label for="api-key-input">Google AI API Key</label>
+          <p class="api-key-description">
+            Your API key is stored securely in your browser's local storage and is never transmitted elsewhere.
+          </p>
+          <div class="input-group">
+            <input type="password" id="api-key-input" placeholder="Enter your Google AI API key" autocomplete="off">
+            <button type="button" id="toggle-visibility-btn" class="toggle-visibility-btn">Show</button>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="save-settings-btn" class="button primary">Save Configuration</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
